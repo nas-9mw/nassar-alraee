@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import bannerImage from '@/assets/banner-nassar.png';
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('');
@@ -23,21 +24,23 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute top-20 right-10 w-px h-32 bg-gradient-to-b from-red-500/30 to-transparent hidden lg:block" />
-      <div className="absolute bottom-20 left-10 w-px h-32 bg-gradient-to-t from-red-500/30 to-transparent hidden lg:block" />
+    <section id="hero" className="relative overflow-hidden">
+      {/* Banner Image */}
+      <div className="w-full relative">
+        <img
+          src={bannerImage}
+          alt="نصّار الراعي - مصمم جرافيك"
+          className="w-full h-auto object-cover min-h-[200px] max-h-[500px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      {/* Content below banner */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 -mt-16 pb-20">
         <div className="fade-up inline-flex items-center gap-2 glass-red px-5 py-2 rounded-full mb-8">
           <span className="w-2 h-2 bg-red-500 rounded-full glow-pulse" />
           <span className="text-sm font-semibold text-red-300">متاح لمشاريع جديدة</span>
         </div>
-
-        <h1 className="fade-up fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
-          <span className="text-white">مرحباً، أنا</span>
-          <br />
-          <span className="text-gradient-red text-glow">نصّار</span>
-        </h1>
 
         <p className="fade-up fade-up-delay-2 text-lg sm:text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-4 font-light">
           مصمم جرافيكي ومُسوّق إبداعي
@@ -79,13 +82,6 @@ export default function Hero() {
               <div className="text-xs sm:text-sm text-white/40 mt-1">{stat.label}</div>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-        <span className="text-xs text-white/40">اسحب للأسفل</span>
-        <div className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5">
-          <div className="w-1 h-2 bg-red-500 rounded-full animate-bounce" />
         </div>
       </div>
     </section>
