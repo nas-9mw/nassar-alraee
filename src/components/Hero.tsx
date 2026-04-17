@@ -73,9 +73,9 @@ export default function Hero() {
 
         <div className="fade-up fade-up-delay-5 mt-20 grid grid-cols-3 gap-6 max-w-lg mx-auto">
           {[
-            { value: '+150', label: 'مشروع منجز' },
-            { value: '+80', label: 'عميل سعيد' },
-            { value: '+7', label: 'سنوات خبرة' },
+            { value: '+426', label: 'مشروع منجز' },
+            { value: '+92', label: 'عميل سعيد' },
+            { value: '+4', label: 'سنوات خبرة' },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-2xl sm:text-3xl font-black text-gradient-red">{stat.value}</div>
