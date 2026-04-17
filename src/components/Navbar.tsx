@@ -38,7 +38,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-strong shadow-lg shadow-black/20 py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2 group">
+          <button onClick={() => scrollTo('hero')} className="flex items-center group" aria-label="نصار الراعي">
             <div className="w-7 h-7 rounded-lg bg-gradient-red flex items-center justify-center shadow-md shadow-red-900/50 group-hover:shadow-red-700/60 transition-shadow">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white">
                 <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.9"/>
@@ -46,9 +46,6 @@ export default function Navbar() {
                 <path d="M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <span className="text-sm font-black text-white tracking-tight">
-              نصّار<span className="text-red-500">.</span>
-            </span>
           </button>
 
           <div className="hidden md:flex items-center gap-8">
