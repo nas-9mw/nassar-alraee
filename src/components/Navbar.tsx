@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logo from '@/assets/logo.svg';
 
 const navLinks = [
   { id: 'hero', label: 'الرئيسية' },
@@ -39,13 +40,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <button onClick={() => scrollTo('hero')} className="flex items-center group" aria-label="نصار الراعي">
-            <div className="w-7 h-7 rounded-lg bg-gradient-red flex items-center justify-center shadow-md shadow-red-900/50 group-hover:shadow-red-700/60 transition-shadow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.9"/>
-                <path d="M2 17l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
+            <img src={logo} alt="نصار الراعي" className="w-9 h-9 group-hover:scale-110 transition-transform" />
           </button>
 
           <div className="hidden md:flex items-center gap-8">
