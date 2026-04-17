@@ -17,7 +17,9 @@ export default function Portfolio() {
         </div>
 
         <motion.a
-          href="#"
+          href="https://drive.google.com/file/d/1soh5VqdSo-sZTAkrnId0NJIAk7x1yMLA/view?usp=drivesdk"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
