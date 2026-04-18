@@ -21,7 +21,7 @@ export default function BannerSlider() {
   return (
     <section className="pt-20 pb-4 sm:pt-24 sm:pb-6">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full overflow-hidden rounded-2xl aspect-[640/160] shadow-2xl">
+        <div className="relative w-full aspect-[640/160]">
           <AnimatePresence mode="wait">
             <motion.img
               key={index}
@@ -31,7 +31,7 @@ export default function BannerSlider() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.8, ease: 'easeInOut' }}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
               loading="lazy"
             />
           </AnimatePresence>
