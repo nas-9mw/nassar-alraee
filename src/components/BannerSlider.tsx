@@ -19,7 +19,7 @@ export default function BannerSlider() {
   }, []);
 
   return (
-    <section className="pt-20 pb-4 sm:pt-24 sm:pb-6">
+    <section className="pt-4 pb-2 sm:pt-6 sm:pb-4">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full aspect-[640/160]">
           <AnimatePresence mode="wait">
@@ -35,19 +35,19 @@ export default function BannerSlider() {
               loading="lazy"
             />
           </AnimatePresence>
+        </div>
 
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            {banners.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                aria-label={`الانتقال للبانر ${i + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
-                }`}
-              />
-            ))}
-          </div>
+        <div className="mt-3 flex justify-center gap-2">
+          {banners.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`الانتقال للبانر ${i + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
