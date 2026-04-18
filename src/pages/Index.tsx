@@ -1,6 +1,7 @@
 import ParallaxBackground from '@/components/ParallaxBackground';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import BannerSlider from '@/components/BannerSlider';
 import Services from '@/components/Services';
 import Portfolio from '@/components/Portfolio';
 import Contact from '@/components/Contact';
@@ -12,6 +13,7 @@ export default function Index() {
       <ParallaxBackground />
       <Navbar />
       <Hero />
+      <BannerSlider />
       <Services />
       <Portfolio />
       <Contact />
