@@ -7,6 +7,9 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const text = `*رسالة جديدة من الموقع*%0A%0A*الاسم:* ${encodeURIComponent(form.name)}%0A*البريد الإلكتروني:* ${encodeURIComponent(form.email)}%0A*الرسالة:*%0A${encodeURIComponent(form.message)}`;
+    const whatsappUrl = `https://wa.me/967779467573?text=${text}`;
+    window.open(whatsappUrl, '_blank');
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
