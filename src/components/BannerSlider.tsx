@@ -1,0 +1,55 @@
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import banner1 from '@/assets/banner-1.png';
+import banner2 from '@/assets/banner-2.png';
+
+const banners = [
+  { src: banner1, alt: 'تصميم يخليك الخيار الأول مش خيار إضافي' },
+  { src: banner2, alt: 'حيا حيا' },
+];
+
+export default function BannerSlider() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="pt-20 pb-4 sm:pt-24 sm:pb-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full overflow-hidden rounded-2xl aspect-[640/160] shadow-2xl">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={index}
+              src={banners[index].src}
+              alt={banners[index].alt}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+          </AnimatePresence>
+
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {banners.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                aria-label={`الانتقال للبانر ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
