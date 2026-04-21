@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Send, Check, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import jsPDF from 'jspdf';
 import appleLogo from '@/assets/logos/apple.svg';
 import sonyLogo from '@/assets/logos/sony.svg';
 import cnnLogo from '@/assets/logos/cnn.svg';
@@ -239,129 +238,64 @@ export default function Brief() {
     }
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    doc.setFillColor(0, 0, 0);
-    doc.rect(0, 0, pageWidth, 30, 'F');
-    doc.setDrawColor(220, 38, 38);
-    doc.setLineWidth(0.5);
-    doc.line(0, 30, pageWidth, 30);
-    doc.setFontSize(22);
-    doc.setTextColor(255, 255, 255);
-    doc.text('Brand Design Brief', pageWidth / 2, 18, { align: 'center' });
-    doc.setFontSize(10);
-    doc.setTextColor(220, 38, 38);
-    doc.text('Nassar Alraee', pageWidth / 2, 25, { align: 'center' });
-
-    let yPos = 40;
-    const addSection = (title: string, fields: { label: string; value: string }[]) => {
-      if (yPos > pageHeight - 40) { doc.addPage(); yPos = 20; }
-      doc.setFillColor(20, 20, 20);
-      doc.roundedRect(15, yPos - 5, pageWidth - 30, 8, 2, 2, 'F');
-      doc.setFontSize(14);
-      doc.setTextColor(220, 38, 38);
-      doc.text(title, 20, yPos);
-      yPos += 12;
-      fields.forEach(field => {
-        if (yPos > pageHeight - 30) { doc.addPage(); yPos = 20; }
-        doc.setFontSize(10);
-        doc.setTextColor(180, 180, 180);
-        doc.text(field.label + ':', 20, yPos);
-        doc.setTextColor(220, 220, 220);
-        const splitText = doc.splitTextToSize(field.value || '-', pageWidth - 45);
-        doc.text(splitText, 20, yPos + 5);
-        yPos += 8 + (splitText.length * 4);
-      });
-      yPos += 5;
-    };
-
-    addSection('Client Info', [
-      { label: 'Name', value: briefData.clientInfo.name },
-      { label: 'Email', value: briefData.clientInfo.email },
-      { label: 'Phone', value: briefData.clientInfo.phone },
-    ]);
-    addSection('Basic Info', [
-      { label: 'Brand', value: briefData.brandName },
-      { label: 'Story', value: briefData.brandStory },
-      { label: 'Field', value: briefData.activityField },
-      { label: 'Description', value: briefData.activityDescription },
-      { label: 'Goals', value: briefData.brandGoals.join(', ') },
-      { label: 'USP', value: briefData.uniqueSellingPoint },
-    ]);
-    addSection('Target Audience', [
-      { label: 'Age', value: briefData.targetAge.join(', ') },
-      { label: 'Gender', value: briefData.targetGender },
-      { label: 'Location', value: briefData.targetLocation },
-      { label: 'Interests', value: briefData.targetInterests.join(', ') },
-      { label: 'Problem', value: briefData.problemSolved },
-      { label: 'Feeling', value: briefData.desiredFeeling.join(', ') },
-    ]);
-    addSection('Brand Personality', [
-      { label: 'Personality', value: briefData.brandPersonality.join(', ') },
-      { label: '3 Words', value: briefData.threeWords },
-      { label: 'Tone', value: briefData.communicationTone },
-      { label: 'Style', value: briefData.brandStyle.join(', ') },
-    ]);
-    addSection('Logo Type', [{ label: 'Type', value: briefData.logoType }]);
-    addSection('Competitors', [
-      { label: 'Competitors', value: briefData.competitors },
-      { label: 'Like', value: briefData.competitorsLike },
-      { label: 'Dislike', value: briefData.competitorsDislike },
-      { label: 'Differentiation', value: briefData.differentiation },
-    ]);
-    addSection('Usage', [
-      { label: 'Platforms', value: briefData.usagePlatforms.join(', ') },
-      { label: 'Versions', value: briefData.multipleVersions },
-      { label: 'Special', value: briefData.specialUsage },
-    ]);
-    addSection('Execution', [
-      { label: 'Budget', value: briefData.budget },
-      { label: 'Deadline', value: briefData.deadline },
-      { label: 'Revisions', value: briefData.revisions },
-      { label: 'Has Files', value: briefData.hasFiles },
-    ]);
-    if (yPos > pageHeight - 50) { doc.addPage(); yPos = 20; }
-    doc.setFillColor(220, 38, 38);
-    doc.roundedRect(15, yPos - 5, pageWidth - 30, 35, 3, 3, 'F');
-    doc.setFontSize(14);
-    doc.setTextColor(255, 255, 255);
-    doc.text('Final Feeling', 20, yPos + 5);
-    doc.setFontSize(11);
-    const splitFinal = doc.splitTextToSize(briefData.finalFeeling, pageWidth - 45);
-    doc.text(splitFinal, 20, yPos + 15);
-    doc.save(`brand-brief-${briefData.clientInfo.name || 'client'}.pdf`);
-  };
-
   const sendToWhatsApp = () => {
-    const summary = `*بريف تصميم علامة تجارية* 🎨
+    const v = (val: string | string[]) => {
+      if (Array.isArray(val)) return val.length ? val.join('، ') : '—';
+      return val && val.trim() ? val : '—';
+    };
+    const summary = `*🎨 بريف تصميم علامة تجارية*
+━━━━━━━━━━━━━━━━━━
 
-*بيانات العميل:*
-الاسم: ${briefData.clientInfo.name}
-الايميل: ${briefData.clientInfo.email}
-الهاتف: ${briefData.clientInfo.phone}
+*👤 بيانات العميل*
+• الاسم: ${v(briefData.clientInfo.name)}
+• الايميل: ${v(briefData.clientInfo.email)}
+• الهاتف: ${v(briefData.clientInfo.phone)}
 
-*معلومات أساسية:*
-العلامة: ${briefData.brandName}
-المجال: ${briefData.activityField}
-الأهداف: ${briefData.brandGoals.join('، ')}
+*📌 معلومات أساسية*
+• اسم العلامة: ${v(briefData.brandName)}
+• قصة الاسم: ${v(briefData.brandStory)}
+• مجال النشاط: ${v(briefData.activityField)}
+• وصف النشاط: ${v(briefData.activityDescription)}
+• الأهداف: ${v(briefData.brandGoals)}
+• ما يميزك: ${v(briefData.uniqueSellingPoint)}
 
-*الجمهور المستهدف:*
-العمر: ${briefData.targetAge.join('، ')}
-الجنس: ${briefData.targetGender}
-الموقع: ${briefData.targetLocation}
+*🎯 الجمهور المستهدف*
+• الفئة العمرية: ${v(briefData.targetAge)}
+• الجنس: ${v(briefData.targetGender)}
+• الموقع: ${v(briefData.targetLocation)}
+• الاهتمامات: ${v(briefData.targetInterests)}
+• المشكلة المحلولة: ${v(briefData.problemSolved)}
+• الشعور المطلوب: ${v(briefData.desiredFeeling)}
 
-*شخصية العلامة:*
-الشخصية: ${briefData.brandPersonality.join('، ')}
-الكلمات: ${briefData.threeWords}
-النبرة: ${briefData.communicationTone}
+*✨ شخصية العلامة*
+• الشخصية: ${v(briefData.brandPersonality)}
+• ثلاث كلمات: ${v(briefData.threeWords)}
+• نبرة التواصل: ${v(briefData.communicationTone)}
+• الطابع: ${v(briefData.brandStyle)}
 
-*نوع الشعار:*
-${briefData.logoType}
+*🎨 نوع الشعار المختار*
+• ${v(briefData.logoType)}
 
-*السؤال الحاسم:*
-${briefData.finalFeeling}`;
+*🏆 المنافسين*
+• المنافسين: ${v(briefData.competitors)}
+• ما يعجب: ${v(briefData.competitorsLike)}
+• ما لا يعجب: ${v(briefData.competitorsDislike)}
+• التميّز: ${v(briefData.differentiation)}
+
+*📱 الاستخدامات*
+• المنصات: ${v(briefData.usagePlatforms)}
+• نسخ متعددة: ${v(briefData.multipleVersions)}
+• استخدامات خاصة: ${v(briefData.specialUsage)}
+
+*⚙️ تفاصيل التنفيذ*
+• الميزانية: ${v(briefData.budget)}
+• موعد التسليم: ${v(briefData.deadline)}
+• التعديلات: ${v(briefData.revisions)}
+• ملفات جاهزة: ${v(briefData.hasFiles)}
+
+*💡 السؤال الحاسم*
+${v(briefData.finalFeeling)}
+━━━━━━━━━━━━━━━━━━`;
     const whatsappUrl = `https://wa.me/967779467573?text=${encodeURIComponent(summary)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -584,10 +518,7 @@ ${briefData.finalFeeling}`;
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    generatePDF();
-                    setTimeout(sendToWhatsApp, 500);
-                  }}
+                  onClick={sendToWhatsApp}
                   className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-l from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white shadow-lg shadow-green-600/30 transition-all duration-300"
                 >
                   <span>إكمال وإرسال</span>
