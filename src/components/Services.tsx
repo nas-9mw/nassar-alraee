@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -73,9 +74,10 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }}>
-              <div className="glass-card p-8 sm:p-10 h-full group cursor-default">
+          {services.map((service, index) => {
+            const isIdentity = service.title === 'هويات بصرية';
+            const cardContent = (
+              <div className="glass-card p-8 sm:p-10 h-full group cursor-pointer">
                 <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors duration-300">
                   {service.icon}
                 </div>
@@ -85,10 +87,25 @@ export default function Services() {
                 <p className="text-white/50 leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
+                {isIdentity && (
+                  <div className="mt-5 inline-flex items-center gap-2 text-red-400 font-semibold text-sm">
+                    <span>ابدأ البريف الآن</span>
+                    <span aria-hidden>←</span>
+                  </div>
+                )}
                 <div className="mt-6 w-0 group-hover:w-full h-0.5 bg-gradient-to-l from-red-500 to-transparent transition-all duration-500" />
               </div>
-            </motion.div>
-          ))}
+            );
+            return (
+              <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }}>
+                {isIdentity ? (
+                  <Link to="/brief" className="block h-full">{cardContent}</Link>
+                ) : (
+                  <div className="h-full cursor-default">{cardContent}</div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
