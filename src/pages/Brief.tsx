@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Send, Check, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import jsPDF from 'jspdf';
+import appleLogo from '@/assets/logos/apple.svg';
+import sonyLogo from '@/assets/logos/sony.svg';
+import cnnLogo from '@/assets/logos/cnn.svg';
+import adidasLogo from '@/assets/logos/adidas.svg';
+import kfcLogo from '@/assets/logos/kfc.svg';
 
 interface ClientInfo {
   name: string;
@@ -55,11 +60,7 @@ const logoTypesData = [
     name: 'شعارات رمزية',
     description: 'تحتوى على أيقونات ورموز',
     example: 'Apple',
-    logo: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20" fill="currentColor">
-        <path d="M50 10 C48 10 47 11 46 13 C44 18 40 22 35 24 C30 26 25 25 20 27 C15 29 12 34 10 39 C8 44 9 49 12 53 C15 57 19 60 23 62 C28 64 33 63 38 61 C43 59 47 56 51 53 C55 50 58 47 62 45 C66 43 71 42 75 40 C79 38 82 34 84 30 C86 26 86 21 84 17 C82 13 78 10 74 8 C70 6 65 6 61 8 C57 10 54 13 52 17 Z"/>
-      </svg>
-    ),
+    logo: <img src={appleLogo} alt="Apple" className="w-14 h-14 object-contain" />,
   },
   {
     id: 'wordmark',
@@ -67,11 +68,7 @@ const logoTypesData = [
     name: 'شعارات نصية',
     description: 'تعتمد على كلمه او اكثر ولا يدخل فى التصميم رموز او رسومات',
     example: 'Sony',
-    logo: (
-      <svg viewBox="0 0 200 60" className="w-32 h-10" fill="currentColor">
-        <text x="10" y="42" fontSize="40" fontWeight="900" fontFamily="Arial Black, sans-serif" letterSpacing="4">SONY</text>
-      </svg>
-    ),
+    logo: <img src={sonyLogo} alt="Sony" className="w-20 h-14 object-contain" />,
   },
   {
     id: 'lettermark',
@@ -79,12 +76,7 @@ const logoTypesData = [
     name: 'شعارات حرفيه',
     description: 'شعارات تحتوى على حرف أو إثنين، وربما اول مجموعة احرف من اسم الشركة أو المشروع',
     example: 'CNN',
-    logo: (
-      <svg viewBox="0 0 150 80" className="w-28 h-16" fill="none" stroke="currentColor" strokeWidth="4">
-        <rect x="4" y="4" width="142" height="72" rx="6"/>
-        <text x="75" y="52" fontSize="38" fontWeight="900" fontFamily="Arial Black, sans-serif" textAnchor="middle" fill="currentColor" stroke="none" letterSpacing="2">CNN</text>
-      </svg>
-    ),
+    logo: <img src={cnnLogo} alt="CNN" className="w-20 h-14 object-contain" />,
   },
   {
     id: 'combination',
@@ -92,14 +84,7 @@ const logoTypesData = [
     name: 'شعارات نصية رمزية',
     description: 'تحتوى على مزيج من النوعين الأول والثاني، كلمات مع رموز وأيقونات',
     example: 'Adidas',
-    logo: (
-      <svg viewBox="0 0 120 100" className="w-24 h-20" fill="currentColor">
-        <polygon points="60,8 18,72 42,72"/>
-        <polygon points="60,8 42,72 68,72"/>
-        <polygon points="60,8 68,72 92,72"/>
-        <text x="60" y="92" fontSize="18" fontWeight="bold" fontFamily="Arial, sans-serif" textAnchor="middle" letterSpacing="3">adidas</text>
-      </svg>
-    ),
+    logo: <img src={adidasLogo} alt="Adidas" className="w-16 h-16 object-contain" />,
   },
   {
     id: 'emblem',
@@ -107,25 +92,7 @@ const logoTypesData = [
     name: 'شعارات رسومية',
     description: 'تعتمد على الرسومات فى اغلب اشكالها، وقد يضاف اليها بعض الكلمات',
     example: 'KFC',
-    logo: (
-      <svg viewBox="0 0 120 140" className="w-24 h-28" fill="currentColor">
-        <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" strokeWidth="4"/>
-        <ellipse cx="60" cy="45" rx="28" ry="32" fill="currentColor"/>
-        <ellipse cx="50" cy="38" rx="5" ry="6" fill="white"/>
-        <ellipse cx="70" cy="38" rx="5" ry="6" fill="white"/>
-        <circle cx="50" cy="40" r="3" fill="#111"/>
-        <circle cx="70" cy="40" r="3" fill="#111"/>
-        <rect x="43" y="32" width="14" height="12" rx="4" fill="none" stroke="white" strokeWidth="2"/>
-        <rect x="63" y="32" width="14" height="12" rx="4" fill="none" stroke="white" strokeWidth="2"/>
-        <line x1="57" y1="38" x2="63" y2="38" stroke="white" strokeWidth="2"/>
-        <ellipse cx="60" cy="50" rx="3" ry="2" fill="white"/>
-        <path d="M48,54 Q60,50 72,54" stroke="white" strokeWidth="2" fill="none"/>
-        <path d="M40,65 Q60,80 80,65" fill="currentColor"/>
-        <path d="M50,75 L60,82 L70,75 L60,82 Z" fill="white"/>
-        <circle cx="60" cy="82" r="3" fill="white"/>
-        <text x="60" y="115" fontSize="24" fontWeight="900" fontFamily="Arial Black, sans-serif" textAnchor="middle" fill="currentColor" letterSpacing="2">KFC</text>
-      </svg>
-    ),
+    logo: <img src={kfcLogo} alt="KFC" className="w-16 h-16 object-contain" />,
   },
 ];
 
