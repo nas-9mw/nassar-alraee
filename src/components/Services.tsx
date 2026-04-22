@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const services = [
   {
+    briefKey: 'graphic',
     title: 'تصميم جرافيكي',
     description: 'تصاميم إبداعية تجذب الانتباه وتحقق أهدافك التسويقية. من المنشورات إلى المطبوعات، أصنع تصاميم تترك أثراً.',
     icon: (
@@ -15,6 +16,7 @@ const services = [
     ),
   },
   {
+    briefKey: 'identity',
     title: 'هويات بصرية',
     description: 'أبني هوية بصرية متكاملة تعكس قيم علامتك التجارية وتميزك عن المنافسين. شعارات، ألوان، خطوط، ودليل استخدام.',
     icon: (
@@ -28,6 +30,7 @@ const services = [
     ),
   },
   {
+    briefKey: 'marketing',
     title: 'استشارات تسويق',
     description: 'أقدم لك استراتيجيات تسويقية مخصصة بناءً على تحليل السوق والمنافسين. خطط عمل واضحة ومقاييس أداء دقيقة.',
     icon: (
@@ -42,6 +45,7 @@ const services = [
     ),
   },
   {
+    briefKey: 'digital',
     title: 'تسويق إلكتروني',
     description: 'إدارة حملات إعلانية احترافية على جميع المنصات الرقمية. إعلانات مستهدفة تحقق أعلى عائد على الاستثمار.',
     icon: (
@@ -75,7 +79,6 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {services.map((service, index) => {
-            const isIdentity = service.title === 'هويات بصرية';
             const cardContent = (
               <div className="glass-card p-8 sm:p-10 h-full group cursor-pointer">
                 <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors duration-300">
@@ -87,22 +90,16 @@ export default function Services() {
                 <p className="text-white/50 leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
-                {isIdentity && (
-                  <div className="mt-5 inline-flex items-center gap-2 text-red-400 font-semibold text-sm">
-                    <span>ابدأ البريف الآن</span>
-                    <span aria-hidden>←</span>
-                  </div>
-                )}
+                <div className="mt-5 inline-flex items-center gap-2 text-red-400 font-semibold text-sm">
+                  <span>ابدأ البريف الآن</span>
+                  <span aria-hidden>←</span>
+                </div>
                 <div className="mt-6 w-0 group-hover:w-full h-0.5 bg-gradient-to-l from-red-500 to-transparent transition-all duration-500" />
               </div>
             );
             return (
               <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }}>
-                {isIdentity ? (
-                  <Link to="/brief" className="block h-full">{cardContent}</Link>
-                ) : (
-                  <div className="h-full cursor-default">{cardContent}</div>
-                )}
+                <Link to={`/brief/${service.briefKey}`} className="block h-full">{cardContent}</Link>
               </motion.div>
             );
           })}
