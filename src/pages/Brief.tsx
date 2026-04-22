@@ -23,9 +23,7 @@ const clientInfoIds = ['name', 'email', 'phone'];
 
 export default function Brief() {
   const { type } = useParams<{ type?: string }>();
-  const config = briefConfigs[type ?? 'identity'];
-
-  if (!config) return <Navigate to="/brief/identity" replace />;
+  const config = briefConfigs[type ?? 'identity'] ?? briefConfigs.identity;
 
   const [currentSection, setCurrentSection] = useState(0);
   const [values, setValues] = useState<FormValues>(() => {
@@ -37,6 +35,8 @@ export default function Brief() {
   });
   const [selectedLogoType, setSelectedLogoType] = useState<string | null>(null);
   const [logoTypeName, setLogoTypeName] = useState<string>('');
+
+  if (type && !briefConfigs[type]) return <Navigate to="/brief/identity" replace />;
 
   const updateField = (id: string, value: string | string[]) => {
     setValues(prev => ({ ...prev, [id]: value }));
