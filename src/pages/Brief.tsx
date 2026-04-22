@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Send, Check, Sparkles, ArrowRight } from 'lucide-react';
-import { Link, useParams, Navigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import appleLogo from '@/assets/logos/apple.svg';
 import sonyLogo from '@/assets/logos/sony.svg';
 import cnnLogo from '@/assets/logos/cnn.svg';
