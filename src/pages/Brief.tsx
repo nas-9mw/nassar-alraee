@@ -36,7 +36,7 @@ export default function Brief() {
   const [selectedLogoType, setSelectedLogoType] = useState<string | null>(null);
   const [logoTypeName, setLogoTypeName] = useState<string>('');
 
-  if (type && !briefConfigs[type]) return <Navigate to="/brief/identity" replace />;
+  
 
   const updateField = (id: string, value: string | string[]) => {
     setValues(prev => ({ ...prev, [id]: value }));
