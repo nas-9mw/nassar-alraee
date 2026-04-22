@@ -203,10 +203,10 @@ export const graphicBrief: BriefConfig = {
       id: 'execution',
       title: 'التنفيذ والميزانية',
       fields: [
-        { id: 'deadline', label: 'ما هو تاريخ التسليم النهائي (الديادلاين)؟', type: 'text', required: true },
+        { id: 'deadline', label: 'ما هو تاريخ التسليم النهائي ؟', type: 'text', required: true },
         {
           id: 'budget',
-          label: 'ما هي الميزانية المخصصة للتصميم (والطباعة إن وجدت)؟',
+          label: 'ما هي الميزانية المخصصة للتصميم ؟',
           type: 'text',
           required: true,
         },
