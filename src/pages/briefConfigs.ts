@@ -277,48 +277,70 @@ export const digitalBrief: BriefConfig = {
   sections: [
     clientInfoSection,
     {
-      id: 'business',
-      title: 'النشاط والمنتج',
+      id: 'project',
+      title: 'عن المشروع',
       fields: [
-        { id: 'brandName', label: 'اسم النشاط / العلامة', type: 'text', required: true },
-        { id: 'productService', label: 'ما المنتج/الخدمة المراد الإعلان عنها؟', type: 'textarea', required: true },
-        { id: 'websiteOrStore', label: 'رابط الموقع أو المتجر (إن وجد)', type: 'text' },
+        { id: 'productName', label: 'إيش اسم منتجك/خدمتك؟', type: 'text', required: true },
+        { id: 'productDescription', label: 'إيش تبيع بالضبط؟', type: 'textarea', required: true },
       ],
     },
     {
-      id: 'campaign',
-      title: 'أهداف الحملة',
+      id: 'goal',
+      title: 'الهدف',
       fields: [
-        { id: 'campaignGoal', label: 'الهدف الأساسي من الحملة', type: 'single', options: ['زيادة المبيعات', 'زيارات الموقع', 'متابعين', 'رسائل/تواصل', 'تنزيلات تطبيق'], required: true },
-        { id: 'expectedResults', label: 'النتائج المتوقعة/المطلوبة', type: 'textarea', required: true },
+        {
+          id: 'campaignGoal',
+          label: 'إيش تبي تحقق من الحملة؟',
+          type: 'single',
+          options: ['مبيعات', 'شهرة', 'متابعين', 'أخرى'],
+          required: true,
+        },
       ],
     },
     {
       id: 'audience',
-      title: 'الجمهور المستهدف',
+      title: 'الجمهور',
       fields: [
-        { id: 'targetAge', label: 'الفئة العمرية', type: 'multi', options: ['13-17', '18-24', '25-34', '35-44', '45+'], required: true },
-        { id: 'targetGender', label: 'الجنس', type: 'single', options: ['ذكر', 'أنثى', 'كلاهما'], required: true },
-        { id: 'targetLocation', label: 'المناطق الجغرافية المستهدفة', type: 'text', required: true },
-        { id: 'targetInterests', label: 'اهتمامات الجمهور', type: 'text', required: true },
+        { id: 'targetAudience', label: 'مين تستهدف؟', type: 'text', required: true },
+        { id: 'targetAge', label: 'كم أعمارهم تقريباً؟', type: 'text', required: true },
+        { id: 'targetLocation', label: 'وين موقعهم؟', type: 'text', required: true },
       ],
     },
     {
-      id: 'platforms',
-      title: 'المنصات والمحتوى',
+      id: 'product',
+      title: 'المنتج',
       fields: [
-        { id: 'platforms', label: 'المنصات الإعلانية المطلوبة', type: 'multi', options: ['إنستقرام', 'فيسبوك', 'تيك توك', 'سناب شات', 'تويتر/X', 'قوقل', 'يوتيوب'], required: true },
-        { id: 'hasCreatives', label: 'هل لديك تصاميم/فيديوهات جاهزة؟', type: 'single', options: ['نعم', 'لا', 'جزئياً'], required: true },
-        { id: 'contentNotes', label: 'ملاحظات على المحتوى/الإبداع', type: 'textarea' },
+        { id: 'productAdvantage', label: 'إيش يميز منتجك؟', type: 'textarea', required: true },
+        { id: 'whyBuy', label: 'ليش الناس تشتريه؟', type: 'textarea', required: true },
+      ],
+    },
+    {
+      id: 'competitors',
+      title: 'المنافسين',
+      fields: [
+        { id: 'competitors', label: 'مين منافسينك؟', type: 'textarea', required: true },
+        { id: 'differentiation', label: 'إيش الفرق بينك وبينهم؟', type: 'textarea', required: true },
       ],
     },
     {
       id: 'budget',
-      title: 'الميزانية والمدة',
+      title: 'الميزانية',
       fields: [
-        { id: 'adBudget', label: 'الميزانية الإعلانية', type: 'single', options: ['أقل من 500$', '500-2000$', '2000-5000$', 'أكثر من 5000$'], required: true },
-        { id: 'campaignDuration', label: 'مدة الحملة المطلوبة', type: 'single', options: ['أسبوع', 'شهر', '3 أشهر', 'مستمرة'], required: true },
-        { id: 'startDate', label: 'تاريخ بدء الحملة المقترح', type: 'text', required: true },
+        { id: 'adBudget', label: 'كم ميزانيتك؟', type: 'text', required: true },
+        { id: 'startDate', label: 'متى تبي تبدأ؟', type: 'text', required: true },
+      ],
+    },
+    {
+      id: 'channels',
+      title: 'القنوات',
+      fields: [
+        {
+          id: 'platforms',
+          label: 'وين تبي تسوق؟',
+          type: 'multi',
+          options: ['انستقرام', 'تيك توك', 'سناب', 'تويتر/X', 'فيسبوك', 'يوتيوب', 'قوقل'],
+          required: true,
+        },
       ],
     },
   ],
