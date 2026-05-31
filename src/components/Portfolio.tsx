@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import portfolioCta from '@/assets/portfolio-cta.jpg';
+import WorksMarquee from './WorksMarquee';
+
 
 export default function Portfolio() {
   return (
@@ -15,6 +17,8 @@ export default function Portfolio() {
           </motion.h2>
           <motion.div initial={{ width: 0 }} whileInView={{ width: 60 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="red-line mx-auto mt-5" />
         </div>
+
+        <WorksMarquee />
 
         <motion.a
           href="https://drive.google.com/file/d/1soh5VqdSo-sZTAkrnId0NJIAk7x1yMLA/view?usp=drivesdk"
