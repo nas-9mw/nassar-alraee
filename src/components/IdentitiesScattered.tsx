@@ -10,36 +10,11 @@ import b7 from '@/assets/brands/brand-7.webp';
 import b8 from '@/assets/brands/brand-8.webp';
 import b9 from '@/assets/brands/brand-9.webp';
 
-const rowA = [b1, b2, b3, b4, b5];
-const rowB = [b6, b7, b8, b9, b1];
-
-function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
-  const items = [...images, ...images, ...images, ...images];
-  return (
-    <div className="overflow-hidden">
-      <div className={`flex gap-4 w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
-        {items.map((src, i) => (
-          <button
-            key={i}
-            onClick={() => onOpen(src)}
-            className="shrink-0 w-[200px] sm:w-[240px] aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
-          >
-            <img
-              src={src}
-              alt="هوية بصرية"
-              loading="lazy"
-              className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-500"
-            />
-            <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+const brands = [b1, b2, b3, b4, b5, b6, b7, b8, b9];
 
 export default function IdentitiesScattered() {
   const [open, setOpen] = useState<string | null>(null);
+  const items = [...brands, ...brands];
 
   return (
     <section id="identities" className="py-24 sm:py-32 relative overflow-hidden">
@@ -59,9 +34,24 @@ export default function IdentitiesScattered() {
         </div>
       </div>
 
-      <div className="space-y-5">
-        <Row images={rowA} dir="left" onOpen={setOpen} />
-        <Row images={rowB} dir="right" onOpen={setOpen} />
+      <div className="overflow-hidden mb-12">
+        <div className="flex w-max marquee-track-left">
+          {items.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setOpen(src)}
+              className="shrink-0 w-[220px] sm:w-[260px] aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative mr-4"
+            >
+              <img
+                src={src}
+                alt="هوية بصرية"
+                loading="lazy"
+                className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-500"
+              />
+              <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
+            </button>
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>

@@ -10,19 +10,19 @@ import w7 from '@/assets/works/work-7.webp';
 import w8 from '@/assets/works/work-8.webp';
 import w9 from '@/assets/works/work-9.webp';
 
-const rowA = [w1, w3, w5, w7, w9];
-const rowB = [w2, w4, w6, w8];
+const rowA = [w1, w3, w5, w7, w9, w2];
+const rowB = [w4, w6, w8, w1, w5, w3];
 
 function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
-  const items = [...images, ...images, ...images, ...images];
+  const items = [...images, ...images];
   return (
     <div className="overflow-hidden">
-      <div className={`flex gap-4 w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
+      <div className={`flex w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
         {items.map((src, i) => (
           <button
             key={i}
             onClick={() => onOpen(src)}
-            className="shrink-0 w-[300px] sm:w-[360px] aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
+            className="shrink-0 w-[300px] sm:w-[360px] aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative mr-4"
           >
             <img
               src={src}
@@ -73,7 +73,7 @@ function Lightbox({ src, onClose }: { src: string | null; onClose: () => void })
 export default function WorksMarquee() {
   const [open, setOpen] = useState<string | null>(null);
   return (
-    <div className="mt-10 space-y-5 -mx-4 sm:-mx-6 lg:-mx-8">
+    <div className="mt-10 mb-16 space-y-4 -mx-4 sm:-mx-6 lg:-mx-8">
       <Row images={rowA} dir="left" onOpen={setOpen} />
       <Row images={rowB} dir="right" onOpen={setOpen} />
       <Lightbox src={open} onClose={() => setOpen(null)} />
