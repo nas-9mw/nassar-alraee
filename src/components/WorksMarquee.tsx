@@ -10,36 +10,31 @@ import w7 from '@/assets/works/work-7.webp';
 import w8 from '@/assets/works/work-8.webp';
 import w9 from '@/assets/works/work-9.webp';
 
-const all = [w1, w2, w3, w4, w5, w6, w7, w8, w9];
 const rowA = [w1, w3, w5, w7, w9];
-const rowB = [w2, w4, w6, w8, w1];
+const rowB = [w2, w4, w6, w8];
 
-function Row({ images, dir }: { images: string[]; dir: 'left' | 'right' }) {
-  const [open, setOpen] = useState<string | null>(null);
-  const items = [...images, ...images];
+function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
+  const items = [...images, ...images, ...images, ...images];
   return (
-    <>
-      <div className="overflow-hidden marquee-mask">
-        <div className={`flex gap-4 w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
-          {items.map((src, i) => (
-            <button
-              key={i}
-              onClick={() => setOpen(src)}
-              className="shrink-0 w-[180px] sm:w-[220px] aspect-[3/4] rounded-2xl overflow-hidden border border-white/5 bg-black/40 group relative"
-            >
-              <img
-                src={src}
-                alt="عمل"
-                loading="lazy"
-                className="w-full h-full object-cover brightness-50 saturate-50 group-hover:brightness-100 group-hover:saturate-100 transition-all duration-500"
-              />
-              <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-2xl transition-all" />
-            </button>
-          ))}
-        </div>
+    <div className="overflow-hidden">
+      <div className={`flex gap-4 w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
+        {items.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => onOpen(src)}
+            className="shrink-0 w-[300px] sm:w-[360px] aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
+          >
+            <img
+              src={src}
+              alt="عمل"
+              loading="lazy"
+              className="w-full h-full object-cover brightness-50 saturate-50 group-hover:brightness-100 group-hover:saturate-100 transition-all duration-500"
+            />
+            <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
+          </button>
+        ))}
       </div>
-      <Lightbox src={open} onClose={() => setOpen(null)} />
-    </>
+    </div>
   );
 }
 
@@ -76,11 +71,12 @@ function Lightbox({ src, onClose }: { src: string | null; onClose: () => void })
 }
 
 export default function WorksMarquee() {
-  void all;
+  const [open, setOpen] = useState<string | null>(null);
   return (
-    <div className="mt-10 space-y-5">
-      <Row images={rowA} dir="left" />
-      <Row images={rowB} dir="right" />
+    <div className="mt-10 space-y-5 -mx-4 sm:-mx-6 lg:-mx-8">
+      <Row images={rowA} dir="left" onOpen={setOpen} />
+      <Row images={rowB} dir="right" onOpen={setOpen} />
+      <Lightbox src={open} onClose={() => setOpen(null)} />
     </div>
   );
 }
