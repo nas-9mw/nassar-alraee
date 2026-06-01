@@ -10,64 +10,60 @@ import b7 from '@/assets/brands/brand-7.webp';
 import b8 from '@/assets/brands/brand-8.webp';
 import b9 from '@/assets/brands/brand-9.webp';
 
-const items = [b1, b2, b3, b4, b5, b6, b7, b8, b9];
+const rowA = [b1, b2, b3, b4, b5];
+const rowB = [b6, b7, b8, b9, b1];
+
+function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
+  const items = [...images, ...images, ...images, ...images];
+  return (
+    <div className="overflow-hidden">
+      <div className={`flex gap-4 w-max ${dir === 'left' ? 'marquee-track-left' : 'marquee-track-right'}`}>
+        {items.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => onOpen(src)}
+            className="shrink-0 w-[200px] sm:w-[240px] aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
+          >
+            <img
+              src={src}
+              alt="هوية بصرية"
+              loading="lazy"
+              className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-500"
+            />
+            <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function IdentitiesScattered() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
     <section id="identities" className="py-24 sm:py-32 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Grid on left */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto lg:mx-0">
-              {items.map((src, i) => (
-                <motion.button
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  onClick={() => setOpen(src)}
-                  className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/10 bg-black/40 group cursor-pointer"
-                >
-                  <img
-                    src={src}
-                    alt="هوية بصرية"
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
-                </motion.button>
-              ))}
-            </div>
-          </div>
-
-          {/* Text on right */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-5 order-1 lg:order-2 text-right"
-          >
+        <div className="text-center mb-12">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <span className="text-red-400 font-semibold text-sm tracking-wider uppercase">العلامات التجارية</span>
-            <h2 className="section-title mt-3 text-white leading-tight">
-              الهويات <br />
-              <span className="text-gradient-red">البصرية</span>
-            </h2>
-            <div className="red-line mt-5 ml-auto" />
-            <p className="text-white/60 leading-loose mt-6 text-base sm:text-lg">
-              هويات بصرية متكاملة تجسّد روح كل علامة تجارية، من الشعار إلى التفاصيل الدقيقة، بصمة فنية تترك أثراً لا يُنسى.
-            </p>
           </motion.div>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="section-title mt-3 text-white">
+            الهويات <span className="text-gradient-red">البصرية</span>
+          </motion.h2>
+          <motion.div initial={{ width: 0 }} whileInView={{ width: 60 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="red-line mx-auto mt-5" />
+          <p className="text-white/60 leading-loose mt-6 text-base sm:text-lg max-w-2xl mx-auto">
+            هويات بصرية متكاملة تجسّد روح كل علامة تجارية، من الشعار إلى التفاصيل الدقيقة.
+          </p>
         </div>
       </div>
 
-      {/* Lightbox card */}
+      <div className="space-y-5">
+        <Row images={rowA} dir="left" onOpen={setOpen} />
+        <Row images={rowB} dir="right" onOpen={setOpen} />
+      </div>
+
       <AnimatePresence>
         {open && (
           <motion.div
