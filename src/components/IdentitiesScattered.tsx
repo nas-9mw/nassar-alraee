@@ -14,7 +14,7 @@ const brands = [b1, b2, b3, b4, b5, b6, b7, b8, b9];
 
 export default function IdentitiesScattered() {
   const [open, setOpen] = useState<string | null>(null);
-  const items = [...brands, ...brands];
+  const items = [...brands, ...brands, ...brands, ...brands];
 
   return (
     <section id="identities" className="py-24 sm:py-32 relative overflow-hidden">
