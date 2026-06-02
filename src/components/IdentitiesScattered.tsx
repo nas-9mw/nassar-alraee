@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type CSSProperties, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import b1 from '@/assets/brands/brand-1.webp';
 import b2 from '@/assets/brands/brand-2.webp';
@@ -14,7 +14,7 @@ const brands = [b1, b2, b3, b4, b5, b6, b7, b8, b9];
 
 export default function IdentitiesScattered() {
   const [open, setOpen] = useState<string | null>(null);
-  const segments = [0, 1];
+  const segments = Array.from({ length: 6 }, (_, index) => index);
 
   return (
     <section id="identities" className="py-24 sm:py-32 relative overflow-hidden">
@@ -34,8 +34,8 @@ export default function IdentitiesScattered() {
         </div>
       </div>
 
-      <div className="overflow-hidden marquee-mask mb-12">
-        <div className="marquee-loop marquee-loop-left marquee-loop-identities">
+      <div className="marquee-viewport marquee-mask mb-12">
+        <div className="marquee-loop marquee-loop-left marquee-loop-identities" style={{ '--marquee-segments': segments.length } as CSSProperties}>
           {segments.map((segment) => (
             <div className="marquee-segment" key={segment} aria-hidden={segment > 0}>
               {brands.map((src, i) => (

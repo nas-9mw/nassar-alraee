@@ -321,20 +321,25 @@
     width: 100%;
   }
 
-  /* Marquee - seamless infinite loop using duplicated content + -50% shift */
+  /* Marquee - closed loop with repeated identical segments */
   @keyframes marqueeLeft {
     0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(calc(-100% / var(--marquee-segments)), 0, 0); }
   }
   @keyframes marqueeRight {
-    0% { transform: translate3d(-50%, 0, 0); }
+    0% { transform: translate3d(calc(-100% / var(--marquee-segments)), 0, 0); }
     100% { transform: translate3d(0, 0, 0); }
+  }
+  .marquee-viewport {
+    overflow: hidden;
+    width: 100%;
   }
   .marquee-loop {
     display: flex;
     flex-wrap: nowrap;
     width: max-content;
     will-change: transform;
+    --marquee-segments: 2;
   }
   .marquee-segment {
     display: flex;
