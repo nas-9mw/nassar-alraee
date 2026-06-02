@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type CSSProperties, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import w1 from '@/assets/works/work-1.webp';
 import w2 from '@/assets/works/work-2.webp';
@@ -19,7 +19,7 @@ function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right';
     <div className="marquee-viewport marquee-mask">
       <div
         className={`marquee-loop ${dir === 'left' ? 'marquee-loop-left' : 'marquee-loop-right'}`}
-        style={{ '--marquee-segments': segments.length } as React.CSSProperties}
+        style={{ '--marquee-segments': segments.length } as CSSProperties}
       >
         {segments.map((segment) => (
           <div className="marquee-segment" key={segment} aria-hidden={segment > 0}>
