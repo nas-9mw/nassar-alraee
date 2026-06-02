@@ -14,7 +14,7 @@ const rowA = [w1, w3, w5, w7, w9, w2];
 const rowB = [w4, w6, w8, w1, w5, w3];
 
 function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
-  const segments = [0, 1, 2];
+  const segments = [0, 1];
   return (
     <div className="overflow-hidden marquee-mask">
       <div className={`marquee-loop ${dir === 'left' ? 'marquee-loop-left' : 'marquee-loop-right'}`}>
