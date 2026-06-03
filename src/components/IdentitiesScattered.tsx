@@ -35,7 +35,7 @@ export default function IdentitiesScattered() {
       </div>
 
       <div className="marquee-viewport marquee-mask mb-12">
-        <div className="marquee-loop marquee-loop-left marquee-loop-identities" style={{ '--marquee-segments': segments.length } as CSSProperties}>
+        <div className="marquee-loop marquee-loop-left marquee-loop-identities">
           {segments.map((segment) => (
             <div className="marquee-segment" key={segment} aria-hidden={segment > 0}>
               {brands.map((src, i) => (
