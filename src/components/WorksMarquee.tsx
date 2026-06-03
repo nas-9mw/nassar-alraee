@@ -13,34 +13,24 @@ import w9 from '@/assets/works/work-9.webp';
 const rowA = [w1, w3, w5, w7, w9, w2];
 const rowB = [w4, w6, w8, w1, w5, w3];
 
-function Row({ images, dir, onOpen }: { images: string[]; dir: 'left' | 'right'; onOpen: (src: string) => void }) {
-  const segments = [0, 1];
+function Row({ images, onOpen }: { images: string[]; onOpen: (src: string) => void }) {
   return (
-    <div className="marquee-viewport marquee-mask">
-      <div
-        className={`marquee-loop ${dir === 'left' ? 'marquee-loop-left' : 'marquee-loop-right'}`}
-      >
-
-        {segments.map((segment) => (
-          <div className="marquee-segment" key={segment} aria-hidden={segment > 0}>
-            {images.map((src, i) => (
-              <button
-                key={`${segment}-${i}`}
-                onClick={() => onOpen(src)}
-                className="shrink-0 w-[300px] sm:w-[360px] aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
-              >
-                <img
-                  src={src}
-                  alt="عمل"
-                  loading="lazy"
-                  className="w-full h-full object-cover brightness-50 saturate-50 group-hover:brightness-100 group-hover:saturate-100 transition-all duration-500"
-                />
-                <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
-              </button>
-            ))}
-          </div>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      {images.map((src, i) => (
+        <button
+          key={i}
+          onClick={() => onOpen(src)}
+          className="aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
+        >
+          <img
+            src={src}
+            alt="عمل"
+            loading="lazy"
+            className="w-full h-full object-cover brightness-50 saturate-50 group-hover:brightness-100 group-hover:saturate-100 transition-all duration-500"
+          />
+          <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
+        </button>
+      ))}
     </div>
   );
 }
@@ -80,9 +70,9 @@ function Lightbox({ src, onClose }: { src: string | null; onClose: () => void })
 export default function WorksMarquee() {
   const [open, setOpen] = useState<string | null>(null);
   return (
-    <div className="mt-10 mb-16 space-y-4 -mx-4 sm:-mx-6 lg:-mx-8">
-      <Row images={rowA} dir="left" onOpen={setOpen} />
-      <Row images={rowB} dir="right" onOpen={setOpen} />
+    <div className="mt-10 mb-16 space-y-4">
+      <Row images={rowA} onOpen={setOpen} />
+      <Row images={rowB} onOpen={setOpen} />
       <Lightbox src={open} onClose={() => setOpen(null)} />
     </div>
   );

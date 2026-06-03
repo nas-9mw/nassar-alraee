@@ -8,7 +8,6 @@ import sony from '@/assets/logos/sony.svg';
 const logos = [adidas, apple, cnn, kfc, sony];
 
 export default function BrandsMarquee() {
-  const items = [...logos, ...logos, ...logos, ...logos];
   return (
     <section id="brands" className="py-20 sm:py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -22,20 +21,18 @@ export default function BrandsMarquee() {
           <motion.div initial={{ width: 0 }} whileInView={{ width: 60 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="red-line mx-auto mt-5" />
         </div>
 
-        <div className="overflow-hidden marquee-mask">
-          <div className="flex gap-12 w-max marquee-track-left" style={{ animationDuration: '40s' }}>
-            {items.map((src, i) => (
-              <div key={i} className="shrink-0 flex items-center justify-center group">
-                <img
-                  src={src}
-                  alt="شعار"
-                  loading="lazy"
-                  style={{ width: 50, height: 50 }}
-                  className="object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:drop-shadow-[0_0_12px_rgba(220,38,38,0.6)] transition-all duration-500"
-                />
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-12">
+          {logos.map((src, i) => (
+            <div key={i} className="flex items-center justify-center group">
+              <img
+                src={src}
+                alt="شعار"
+                loading="lazy"
+                style={{ width: 50, height: 50 }}
+                className="object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:drop-shadow-[0_0_12px_rgba(220,38,38,0.6)] transition-all duration-500"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
