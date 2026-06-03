@@ -321,13 +321,13 @@
     width: 100%;
   }
 
-  /* Marquee - closed loop with repeated identical segments */
+  /* Marquee - seamless infinite loop (2 identical halves, exact -50%) */
   @keyframes marqueeLeft {
     0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(calc(-100% / var(--marquee-segments)), 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
   }
   @keyframes marqueeRight {
-    0% { transform: translate3d(calc(-100% / var(--marquee-segments)), 0, 0); }
+    0% { transform: translate3d(-50%, 0, 0); }
     100% { transform: translate3d(0, 0, 0); }
   }
   .marquee-viewport {
@@ -339,7 +339,6 @@
     flex-wrap: nowrap;
     width: max-content;
     will-change: transform;
-    --marquee-segments: 2;
   }
   .marquee-segment {
     display: flex;
@@ -348,6 +347,7 @@
   .marquee-segment > * {
     margin-inline-end: 1rem;
   }
+
   .marquee-loop-left,
   .marquee-track-left {
     animation: marqueeLeft 50s linear infinite;
