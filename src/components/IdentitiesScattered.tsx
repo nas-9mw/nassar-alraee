@@ -1,4 +1,4 @@
-import { type CSSProperties, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import b1 from '@/assets/brands/brand-1.webp';
 import b2 from '@/assets/brands/brand-2.webp';
