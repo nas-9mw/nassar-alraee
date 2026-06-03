@@ -14,7 +14,6 @@ const brands = [b1, b2, b3, b4, b5, b6, b7, b8, b9];
 
 export default function IdentitiesScattered() {
   const [open, setOpen] = useState<string | null>(null);
-  const segments = [0, 1];
 
   return (
     <section id="identities" className="py-24 sm:py-32 relative overflow-hidden">
@@ -34,26 +33,22 @@ export default function IdentitiesScattered() {
         </div>
       </div>
 
-      <div className="marquee-viewport marquee-mask mb-12">
-        <div className="marquee-loop marquee-loop-left marquee-loop-identities">
-          {segments.map((segment) => (
-            <div className="marquee-segment" key={segment} aria-hidden={segment > 0}>
-              {brands.map((src, i) => (
-                <button
-                  key={`${segment}-${i}`}
-                  onClick={() => setOpen(src)}
-                  className="shrink-0 w-[220px] sm:w-[260px] aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
-                >
-                  <img
-                    src={src}
-                    alt="هوية بصرية"
-                    loading="lazy"
-                    className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
-                </button>
-              ))}
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+          {brands.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setOpen(src)}
+              className="aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40 group relative"
+            >
+              <img
+                src={src}
+                alt="هوية بصرية"
+                loading="lazy"
+                className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-500"
+              />
+              <div className="absolute inset-0 ring-0 group-hover:ring-2 group-hover:ring-red-500/60 rounded-xl transition-all" />
+            </button>
           ))}
         </div>
       </div>
