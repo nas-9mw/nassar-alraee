@@ -1,4 +1,4 @@
-import { type CSSProperties, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import w1 from '@/assets/works/work-1.webp';
 import w2 from '@/assets/works/work-2.webp';
