@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import portfolioCta from '@/assets/portfolio-cta.jpg';
-import WorksMarquee from './WorksMarquee';
-
 
 export default function Portfolio() {
   return (
@@ -16,9 +16,29 @@ export default function Portfolio() {
             أحدث <span className="text-gradient-red">مشاريعي</span>
           </motion.h2>
           <motion.div initial={{ width: 0 }} whileInView={{ width: 60 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="red-line mx-auto mt-5" />
-        </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-white/70 mt-6 max-w-2xl mx-auto"
+          >
+            تصفّح أحدث أعمالي بمقاساتها الأصلية في صفحة مخصصة لعرض المشاريع.
+          </motion.p>
 
-        <WorksMarquee />
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-8"
+          >
+            <Link to="/works" className="btn-primary inline-flex items-center gap-2">
+              شاهد أعمالي
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        </div>
 
         <motion.a
           href="https://drive.google.com/file/d/1soh5VqdSo-sZTAkrnId0NJIAk7x1yMLA/view?usp=drivesdk"
