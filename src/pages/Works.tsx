@@ -27,17 +27,28 @@ function MarqueeRow({
   direction: 'left' | 'right';
   onOpen: (src: string) => void;
 }) {
-  // Duplicate enough times for a seamless loop
   const loop = [...images, ...images, ...images, ...images];
-  // Each card width approx: mobile 288 (w-72) -> base distance
-  // We use percentage translation so it adapts.
+  const controls = useAnimationControls();
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) {
+      controls.stop();
+    } else {
+      controls.start({
+        x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
+        transition: { duration: 60, repeat: Infinity, ease: 'linear' },
+      });
+    }
+  }, [paused, direction, controls]);
+
   return (
-    <div className="flex overflow-hidden py-3 gap-4 group">
-      <motion.div
-        animate={{ x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'] }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-        className="flex gap-4 sm:gap-5 shrink-0 group-hover:[animation-play-state:paused]"
-      >
+    <div
+      className="flex overflow-hidden py-3 gap-4"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <motion.div animate={controls} className="flex gap-4 sm:gap-5 shrink-0">
         {loop.map((img, i) => (
           <motion.button
             key={i}
